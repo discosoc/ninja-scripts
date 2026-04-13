@@ -1,0 +1,17 @@
+$testpathscripts = Test-Path "C:\Scripts"
+Write-Host "Need working directory. Checking for Scripts folder..."
+Start-Sleep -Seconds 5
+if ($testpathscripts) {
+    Write-Host "Scripts folder already exists"
+}
+else {
+    New-Item -path "C:\Scripts" -ItemType Directory
+    Write-Host "Scripts Folder Created"
+}
+$AdobeURI = "https://trials.adobe.com/AdobeProducts/APRO/Acrobat_HelpX/win32/Acrobat_DC_Web_x64_WWMUI.zip"
+$AdobeOutfile = "C:\Scripts\Acrobat_DC_Web_x64_WWMUI.zip"
+$AdobeDestPath = "C:\Scripts"
+Invoke-WebRequest -Uri $AdobeURI -Outfile "$AdobeOutfile"
+Expand-Archive -LiteralPath $AdobeOutfile -DestinationPath "$AdobeDestPath"
+Start-Process -Wait -FilePath "$AdobeDestPath\ESD\Adobe Acrobat\setup.exe" -ArgumentList '/sAll /rs /msi EULA_ACCEPT=YES'
+Write-Host "Acrobat installed"
