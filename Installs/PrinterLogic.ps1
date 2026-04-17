@@ -8,13 +8,9 @@
 #   printerlogicauthcode   - Org custom field - PrinterLogic authorization code (required)
 # ==============================================================================
 
-Get-ChildItem env: | Sort-Object Name | ForEach-Object { Write-Host "$($_.Name) = $($_.Value)" } 
-
-write-host $env:uefiversion
-
 # --- Ninja variables ---
-$printerlogichomeurl   = $env:printerlogichomeurl
-$printerlogicauthcode  = $env:printerlogicauthcode
+$printerlogichomeurl   = Ninja-Property-Get printerlogichomeurl
+$printerlogicauthcode  = Ninja-Property-Get printerlogicauthcode
 
 if (-not $printerlogichomeurl) {
     Write-Host "ERROR: printerlogichomeurl org custom field is required."
