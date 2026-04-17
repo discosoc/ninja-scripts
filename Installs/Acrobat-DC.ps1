@@ -44,6 +44,7 @@ if (-not (Test-Path $workingDir)) {
 }
 
 # --- Download ---
+$ProgressPreference = 'SilentlyContinue'
 Write-Host "Downloading Acrobat DC..."
 Invoke-WebRequest -Uri $downloadUri -OutFile $outFile -UseBasicParsing
 Write-Host "Download complete."
