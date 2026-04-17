@@ -8,6 +8,8 @@
 #   printerlogicauthcode   - Org custom field - PrinterLogic authorization code (required)
 # ==============================================================================
 
+Get-ChildItem env: | Sort-Object Name | ForEach-Object { Write-Host "$($_.Name) = $($_.Value)" } 
+
 # --- Ninja variables ---
 $printerlogichomeurl   = $env:printerlogichomeurl
 $printerlogicauthcode  = $env:printerlogicauthcode
