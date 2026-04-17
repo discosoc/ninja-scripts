@@ -43,6 +43,13 @@ if (-not (Test-Path $workingDir)) {
     Write-Host "Working directory already exists: $workingDir"
 }
 
+Write-Host $workingDir
+Write-Host $downloadUri
+Write-Host $outFile
+Write-Host $installExe
+Write-Host $detectionName
+Write-Host $registryPaths
+
 # --- Download ---
 $ProgressPreference = 'SilentlyContinue'
 Write-Host "Downloading Acrobat DC..."
