@@ -5,6 +5,7 @@
 # ==============================================================================
 
 # --- Variables ---
+$ProgressPreference = 'SilentlyContinue'
 $workingDir   = "C:\Scripts"
 $odtUri       = "https://aka.ms/ODTsetup"
 $odtInstaller = "$workingDir\ODTsetup.exe"

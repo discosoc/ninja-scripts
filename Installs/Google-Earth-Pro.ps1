@@ -7,6 +7,7 @@
 # ==============================================================================
 
 # --- Variables ---
+$ProgressPreference = 'SilentlyContinue'
 $workingDir    = "C:\Scripts"
 $downloadUri   = "https://dl.google.com/dl/earth/client/advanced/current/googleearthprowin-7.3.7-x64.exe"
 $outFile       = "$workingDir\googleearthprowin-7.3.7-x64.exe"

@@ -20,6 +20,7 @@ if ($edition -ne "32" -and $edition -ne "64") {
 }
 
 # --- Variables ---
+$ProgressPreference = 'SilentlyContinue'
 $workingDir   = "C:\Scripts"
 $odtUri       = "https://aka.ms/ODTsetup"
 $odtInstaller = "$workingDir\ODTsetup.exe"

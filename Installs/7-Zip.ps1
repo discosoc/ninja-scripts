@@ -7,6 +7,7 @@
 # ==============================================================================
 
 # --- Variables ---
+$ProgressPreference = 'SilentlyContinue'
 $workingDir    = "C:\Scripts"
 $downloadUri   = "https://github.com/ip7z/7zip/releases/download/26.00/7z2600-x64.exe"
 $outFile       = "$workingDir\7z2600-x64.exe"

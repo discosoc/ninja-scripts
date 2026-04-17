@@ -7,6 +7,7 @@
 # ==============================================================================
 
 # --- Variables ---
+$ProgressPreference = 'SilentlyContinue'
 $workingDir    = "C:\Scripts"
 $downloadUri   = "https://download01.logi.com/web/ftp/pub/techsupport/optionsplus/logioptionsplus_installer.exe"
 $outFile       = "$workingDir\logioptionsplus_installer.exe"

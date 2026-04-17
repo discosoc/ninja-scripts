@@ -22,6 +22,7 @@ if (-not $authorizationcode) {
 }
 
 # --- Variables ---
+$ProgressPreference = 'SilentlyContinue'
 $workingDir    = "C:\Scripts"
 $downloadUri   = "https://afc.printercloud.com/client/setup/PrinterInstallerClient.msi"
 $outFile       = "$workingDir\PrinterInstallerClient.msi"

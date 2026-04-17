@@ -7,6 +7,7 @@
 # ==============================================================================
 
 # --- Variables ---
+$ProgressPreference = 'SilentlyContinue'
 $workingDir    = "C:\Scripts"
 $downloadUri   = "https://redirect.splashtop.com/my/src/msi"
 $outFile       = "$workingDir\SplashtopBusiness.msi"
