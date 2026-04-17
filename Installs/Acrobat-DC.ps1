@@ -13,7 +13,7 @@
 $workingDir      = "C:\Scripts"
 $downloadUri     = "https://trials.adobe.com/AdobeProducts/APRO/Acrobat_HelpX/win32/Acrobat_DC_Web_x64_WWMUI.zip"
 $outFile         = "$workingDir\Acrobat_DC_Web_x64_WWMUI.zip"
-$installExe      = "$workingDir\ESD\Adobe Acrobat\setup.exe"
+$installExe      = "$workingDir\Adobe Acrobat\setup.exe"
 $detectionName   = "*Adobe Acrobat*"
 $registryPaths   = @(
     "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*",
