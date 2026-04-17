@@ -7,6 +7,13 @@
 #   forceinstall - bypass already-installed check when set to any value
 # ==============================================================================
 
+# --- Manufacturer check ---
+$manufacturer = (Get-CimInstance -ClassName Win32_ComputerSystem).Manufacturer
+if ($manufacturer -notlike "*Dell*") {
+    Write-Host "This script is intended for Dell systems only. Detected manufacturer: $manufacturer"
+    exit 0
+}
+
 # --- Variables ---
 $ProgressPreference = 'SilentlyContinue'
 $workingDir     = "C:\Scripts"

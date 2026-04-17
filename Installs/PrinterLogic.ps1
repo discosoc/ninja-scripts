@@ -3,21 +3,21 @@
 # Installs the PrinterLogic Client on Windows.
 #
 # Ninja script variables:
-#   homeurl           - PrinterLogic tenant URL (required)
-#   authorizationcode - PrinterLogic authorization code (required)
-#   forceinstall      - bypass already-installed check when set to any value
+#   forceinstall            - bypass already-installed check when set to any value
+#   printerlogichomeurl    - Org custom field - PrinterLogic tenant URL (required)
+#   printerlogicauthcode   - Org custom field - PrinterLogic authorization code (required)
 # ==============================================================================
 
 # --- Ninja variables ---
-$homeurl           = $env:homeurl
-$authorizationcode = $env:authorizationcode
+$printerlogichomeurl   = $env:printerlogichomeurl
+$printerlogicauthcode  = $env:printerlogicauthcode
 
-if (-not $homeurl) {
-    Write-Host "ERROR: homeurl script variable is required."
+if (-not $printerlogichomeurl) {
+    Write-Host "ERROR: printerlogichomeurl org custom field is required."
     exit 1
 }
-if (-not $authorizationcode) {
-    Write-Host "ERROR: authorizationcode script variable is required."
+if (-not $printerlogicauthcode) {
+    Write-Host "ERROR: printerlogicauthcode org custom field is required."
     exit 1
 }
 
@@ -62,5 +62,5 @@ Write-Host "Download complete."
 
 # --- Install ---
 Write-Host "Installing PrinterLogic Client..."
-Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i `"$outFile`" /qn HOMEURL=`"$homeurl`" AUTHORIZATION_CODE=`"$authorizationcode`""
+Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i `"$outFile`" /qn HOMEURL=`"$printerlogichomeurl`" AUTHORIZATION_CODE=`"$printerlogicauthcode`""
 Write-Host "PrinterLogic Client installed successfully."
