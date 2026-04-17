@@ -9,7 +9,7 @@
 # --- Variables ---
 $ProgressPreference = 'SilentlyContinue'
 $workingDir    = "C:\Scripts"
-$downloadUri   = "https://get.videolan.org/vlc/3.0.23/win64/vlc-3.0.23-win64.msi"
+$downloadUri   = "https://download.videolan.org/vlc/3.0.23/win64/vlc-3.0.23-win64.msi"
 $outFile       = "$workingDir\vlc-3.0.23-win64.msi"
 $detectionName = "*VLC media player*"
 $registryPaths = @(
