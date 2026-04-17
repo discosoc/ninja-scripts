@@ -10,6 +10,8 @@
 
 Get-ChildItem env: | Sort-Object Name | ForEach-Object { Write-Host "$($_.Name) = $($_.Value)" } 
 
+write-host $env:uefiversion
+
 # --- Ninja variables ---
 $printerlogichomeurl   = $env:printerlogichomeurl
 $printerlogicauthcode  = $env:printerlogicauthcode
