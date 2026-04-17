@@ -3,15 +3,15 @@
 # Installs the Splashtop Streamer on Windows.
 #
 # Ninja script variables:
-#   splashtopcode - Splashtop deployment package code (required)
+#   splashtopcode - Org custom field - Splashtop deployment package code (required)
 #   forceinstall  - bypass already-installed check when set to any value
 # ==============================================================================
 
 # --- Ninja variables ---
-$splashtopcode = $env:splashtopcode
+$splashtopcode = Ninja-Property-Get splashtopcode
 
 if (-not $splashtopcode) {
-    Write-Host "ERROR: splashtopcode script variable is required."
+    Write-Host "ERROR: splashtopcode org custom field is required."
     exit 1
 }
 
