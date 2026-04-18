@@ -9,8 +9,7 @@
 # --- Variables ---
 $ProgressPreference = 'SilentlyContinue'
 $workingDir    = "C:\Scripts"
-$downloadUri   = "https://github.com/ip7z/7zip/releases/download/26.00/7z2600-x64.exe"
-$outFile       = "$workingDir\7z2600-x64.exe"
+$outFile       = "$workingDir\7zip-x64.exe"
 $detectionName = "*7-Zip*"
 $registryPaths = @(
     "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*",
@@ -41,11 +40,32 @@ if (-not (Test-Path $workingDir)) {
 }
 
 # --- Download ---
+Write-Host "Resolving 7-Zip download link..."
+try {
+    $page = Invoke-WebRequest -Uri "https://www.7-zip.org/download.html" -UseBasicParsing
+} catch {
+    Write-Host "ERROR: Failed to reach 7-Zip download page. $_"
+    exit 1
+}
+$downloadUri = ($page.Links | Where-Object { $_.href -like "*releases/download*x64.exe" } | Select-Object -First 1).href
+if (-not $downloadUri) {
+    Write-Host "ERROR: Could not locate 7-Zip download link on the download page."
+    exit 1
+}
 Write-Host "Downloading 7-Zip..."
-Invoke-WebRequest -Uri $downloadUri -OutFile $outFile -UseBasicParsing
+try {
+    Invoke-WebRequest -Uri $downloadUri -OutFile $outFile -UseBasicParsing
+} catch {
+    Write-Host "ERROR: Failed to download 7-Zip. $_"
+    exit 1
+}
 Write-Host "Download complete."
 
 # --- Install ---
 Write-Host "Installing 7-Zip..."
-Start-Process -Wait -FilePath $outFile -ArgumentList "/S"
+$result = Start-Process -Wait -PassThru -FilePath $outFile -ArgumentList "/S"
+if ($result.ExitCode -ne 0) {
+    Write-Host "ERROR: 7-Zip installation failed (exit code $($result.ExitCode))."
+    exit 1
+}
 Write-Host "7-Zip installed successfully."
