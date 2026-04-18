@@ -33,11 +33,11 @@
   "group" these assets.
 #>
 
-$LICENSE_KEY = $env:license_key
+$LICENSE_KEY = Ninja-Property-Get autoelevatelicense
 $COMPANY_NAME = $env:NINJA_ORGANIZATION_NAME
 $LOCATION_NAME = $env:NINJA_LOCATION_NAME
-$ELEVATION_MODE = $env:elevation_mode
-$BLOCKER_MODE = $env:blocker_mode
+$ELEVATION_MODE = Ninja-Property-Get autoelevatemode
+$BLOCKER_MODE = Ninja-Property-Get autoelevateblocker
 
 # Set $DebugPrintEnabled = 1 to enabled debug log printing to see what's going on.
 $DebugPrintEnabled = 0
