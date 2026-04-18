@@ -21,7 +21,7 @@ if ($edition -ne "32" -and $edition -ne "64") {
 
 # --- Variables ---
 $ProgressPreference = 'SilentlyContinue'
-$workingDir   = "C:\Scripts"
+$workingDir   = "C:\Scripts\Office"
 $configFile   = "$workingDir\OfficeConfig.xml"
 
 # --- Ensure working directory ---

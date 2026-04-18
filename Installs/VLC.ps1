@@ -9,8 +9,6 @@
 # --- Variables ---
 $ProgressPreference = 'SilentlyContinue'
 $workingDir    = "C:\Scripts"
-$downloadUri   = "https://download.videolan.org/vlc/3.0.23/win64/vlc-3.0.23-win64.msi"
-$outFile       = "$workingDir\vlc-3.0.23-win64.msi"
 $detectionName = "*VLC media player*"
 $registryPaths = @(
     "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*",
@@ -41,11 +39,33 @@ if (-not (Test-Path $workingDir)) {
 }
 
 # --- Download ---
+Write-Host "Resolving VLC download link..."
+try {
+    $page = Invoke-WebRequest -Uri "https://www.videolan.org/vlc/download-windows.html" -UseBasicParsing
+} catch {
+    Write-Host "ERROR: Failed to reach VLC download page. $_"
+    exit 1
+}
+$downloadUri = ($page.Links | Where-Object { $_.href -like "*win64.msi" } | Select-Object -First 1).href
+if (-not $downloadUri) {
+    Write-Host "ERROR: Could not locate VLC download link on the download page."
+    exit 1
+}
+$outFile = "$workingDir\$(Split-Path $downloadUri -Leaf)"
 Write-Host "Downloading VLC media player..."
-Invoke-WebRequest -Uri $downloadUri -OutFile $outFile -UseBasicParsing
+try {
+    Invoke-WebRequest -Uri $downloadUri -OutFile $outFile -UseBasicParsing
+} catch {
+    Write-Host "ERROR: Failed to download VLC. $_"
+    exit 1
+}
 Write-Host "Download complete."
 
 # --- Install ---
 Write-Host "Installing VLC media player..."
-Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i `"$outFile`" /quiet /norestart"
+$result = Start-Process -Wait -PassThru -FilePath "msiexec.exe" -ArgumentList "/i `"$outFile`" /quiet /norestart"
+if ($result.ExitCode -ne 0) {
+    Write-Host "ERROR: VLC installation failed (exit code $($result.ExitCode))."
+    exit 1
+}
 Write-Host "VLC media player installed successfully."

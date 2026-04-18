@@ -6,7 +6,7 @@
 
 # --- Variables ---
 $ProgressPreference = 'SilentlyContinue'
-$workingDir   = "C:\Scripts"
+$workingDir   = "C:\Scripts\Office"
 $configFile   = "$workingDir\OfficeRemoval.xml"
 
 # --- Ensure working directory ---
