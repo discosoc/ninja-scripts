@@ -22,7 +22,6 @@ if ($edition -ne "32" -and $edition -ne "64") {
 # --- Variables ---
 $ProgressPreference = 'SilentlyContinue'
 $workingDir   = "C:\Scripts"
-$odtUri       = "https://aka.ms/ODTsetup"
 $odtInstaller = "$workingDir\ODTsetup.exe"
 $configFile   = "$workingDir\OfficeConfig.xml"
 
@@ -83,16 +82,41 @@ $configXml | Out-File -FilePath $configFile -Encoding utf8 -Force
 Write-Host "Configuration written to $configFile"
 
 # --- Download ODT ---
+Write-Host "Resolving Office Deployment Tool download link..."
+try {
+    $downloadPage = Invoke-WebRequest -Uri "https://www.microsoft.com/en-us/download/details.aspx?id=49117" -UseBasicParsing
+} catch {
+    Write-Host "ERROR: Failed to reach Microsoft download page. $_"
+    exit 1
+}
+$odtUri = ($downloadPage.Links | Where-Object { $_.href -like "*officedeploymenttool*.exe" } | Select-Object -First 1 -ExpandProperty href)
+if (-not $odtUri) {
+    Write-Host "ERROR: Could not locate ODT download link on Microsoft's download page."
+    exit 1
+}
 Write-Host "Downloading Office Deployment Tool..."
-Invoke-WebRequest -Uri $odtUri -OutFile $odtInstaller -UseBasicParsing
+try {
+    Invoke-WebRequest -Uri $odtUri -OutFile $odtInstaller -UseBasicParsing
+} catch {
+    Write-Host "ERROR: Failed to download ODT. $_"
+    exit 1
+}
 Write-Host "Download complete."
 
 # --- Extract ODT ---
 Write-Host "Extracting ODT..."
-Start-Process -Wait -FilePath $odtInstaller -ArgumentList "/quiet /extract:`"$workingDir`""
+$result = Start-Process -Wait -PassThru -FilePath $odtInstaller -ArgumentList "/quiet /extract:`"$workingDir`""
+if ($result.ExitCode -ne 0) {
+    Write-Host "ERROR: ODT extraction failed (exit code $($result.ExitCode))."
+    exit 1
+}
 Write-Host "Extraction complete."
 
 # --- Run ODT ---
 Write-Host "Running Office Deployment Tool..."
-Start-Process -Wait -FilePath "$workingDir\setup.exe" -ArgumentList "/configure `"$configFile`""
+$result = Start-Process -Wait -PassThru -FilePath "$workingDir\setup.exe" -ArgumentList "/configure `"$configFile`""
+if ($result.ExitCode -ne 0) {
+    Write-Host "ERROR: Office deployment failed (exit code $($result.ExitCode))."
+    exit 1
+}
 Write-Host "Microsoft 365 deployment complete."
