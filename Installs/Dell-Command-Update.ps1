@@ -18,7 +18,7 @@ if ($manufacturer -notlike "*Dell*") {
 $ProgressPreference = 'SilentlyContinue'
 $workingDir     = "C:\Scripts"
 $downloadUri    = "https://dl.dell.com/FOLDER12925773M/2/Dell-Command-Update-Windows-Universal-Application_P4DJW_WIN64_5.5.0_A00_01.EXE"
-$outFile        = "$workingDir\Dell-Command-Update-Universal.exe"
+$outFile        = "$workingDir\$(Split-Path $downloadUri -Leaf)"
 $uwpDisplayName = "Dell Command | Update for Windows Universal"
 $legacyNames    = @("Dell Command | Update", "Dell Command | Update for Windows 10")
 $registryPaths  = @(

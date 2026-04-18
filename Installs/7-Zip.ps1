@@ -9,7 +9,6 @@
 # --- Variables ---
 $ProgressPreference = 'SilentlyContinue'
 $workingDir    = "C:\Scripts"
-$outFile       = "$workingDir\7zip-x64.exe"
 $detectionName = "*7-Zip*"
 $registryPaths = @(
     "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*",
@@ -52,6 +51,7 @@ if (-not $downloadUri) {
     Write-Host "ERROR: Could not locate 7-Zip download link on the download page."
     exit 1
 }
+$outFile = "$workingDir\$(Split-Path $downloadUri -Leaf)"
 Write-Host "Downloading 7-Zip..."
 try {
     Invoke-WebRequest -Uri $downloadUri -OutFile $outFile -UseBasicParsing

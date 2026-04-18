@@ -7,7 +7,6 @@
 # --- Variables ---
 $ProgressPreference = 'SilentlyContinue'
 $workingDir   = "C:\Scripts"
-$odtInstaller = "$workingDir\ODTsetup.exe"
 $configFile   = "$workingDir\OfficeRemoval.xml"
 
 # --- Ensure working directory ---
@@ -46,6 +45,7 @@ if (-not $odtUri) {
     Write-Host "ERROR: Could not locate ODT download link on Microsoft's download page."
     exit 1
 }
+$odtInstaller = "$workingDir\$(Split-Path $odtUri -Leaf)"
 Write-Host "Downloading Office Deployment Tool..."
 try {
     Invoke-WebRequest -Uri $odtUri -OutFile $odtInstaller -UseBasicParsing
