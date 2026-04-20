@@ -43,14 +43,16 @@ if (-not (Test-Path $workingDir)) {
 
 # --- Download ---
 Write-Host "Resolving VLC download link..."
+$baseUri = "https://download.videolan.org/pub/videolan/vlc/last/win64/"
 try {
-    $page = Invoke-WebRequest -Uri "https://www.videolan.org/vlc/download-windows.html" -UseBasicParsing
+    $page = Invoke-WebRequest -Uri $baseUri -UseBasicParsing
 } catch {
     Write-Host "ERROR: Failed to reach VLC download page. $_"
     exit 1
 }
-$downloadUri = ($page.Links | Where-Object { $_.href -like "*win64.msi" } | Select-Object -First 1).href
-if (-not $downloadUri) {
+$msiFile = ($page.Links | Where-Object { $_.href -like "*win64.msi" } | Select-Object -First 1).href
+$downloadUri = $baseUri + $msiFile
+if (-not $msiFile) {
     Write-Host "ERROR: Could not locate VLC download link on the download page."
     exit 1
 }
