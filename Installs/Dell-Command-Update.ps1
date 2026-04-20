@@ -4,7 +4,7 @@
 # Uninstalls the classic or Windows 10 variant first if present.
 #
 # Ninja script variables:
-#   forceinstall - bypass already-installed check when set to any value
+#   installtype - standard (default) or force
 # ==============================================================================
 
 # --- Manufacturer check ---
@@ -34,13 +34,13 @@ $allEntries = $registryPaths |
 # --- Already-installed check (UWP target) ---
 $uwpEntry = $allEntries | Where-Object { $_.DisplayName -eq $uwpDisplayName } | Select-Object -First 1
 
-if ($uwpEntry -and -not $forceinstall) {
-    Write-Host "Dell Command | Update for Windows Universal is already installed (version $($uwpEntry.DisplayVersion)). Set forceinstall to override."
+if ($uwpEntry -and $installtype -ne 'force') {
+    Write-Host "Dell Command | Update for Windows Universal is already installed (version $($uwpEntry.DisplayVersion)). Set installtype to force to reinstall."
     exit 0
 }
 
-if ($uwpEntry -and $forceinstall) {
-    Write-Host "forceinstall set — reinstalling Dell Command | Update for Windows Universal (currently $($uwpEntry.DisplayVersion))."
+if ($uwpEntry -and $installtype -eq 'force') {
+    Write-Host "force — reinstalling Dell Command | Update for Windows Universal (currently $($uwpEntry.DisplayVersion))."
 }
 
 # --- Uninstall legacy versions if present ---

@@ -3,7 +3,7 @@
 # Installs VLC media player (64-bit) on Windows.
 #
 # Ninja script variables:
-#   forceinstall - bypass already-installed check when set to any value
+#   installtype - standard (default), upgrade, or force
 # ==============================================================================
 
 # --- Variables ---
@@ -21,13 +21,16 @@ $installedEntry = $registryPaths |
     Where-Object { $_.DisplayName -like $detectionName } |
     Select-Object -First 1
 
-if ($installedEntry -and -not $forceinstall) {
-    Write-Host "VLC media player is already installed (version $($installedEntry.DisplayVersion)). Set forceinstall to override."
+if ($installtype -eq 'upgrade' -and -not $installedEntry) {
+    Write-Host "VLC media player is not installed — nothing to upgrade."
     exit 0
-}
-
-if ($installedEntry -and $forceinstall) {
-    Write-Host "forceinstall set — reinstalling VLC media player (currently $($installedEntry.DisplayVersion))."
+} elseif ($installedEntry -and $installtype -ne 'force' -and $installtype -ne 'upgrade') {
+    Write-Host "VLC media player is already installed (version $($installedEntry.DisplayVersion)). Set installtype to force to reinstall."
+    exit 0
+} elseif ($installedEntry -and $installtype -eq 'force') {
+    Write-Host "force — reinstalling VLC media player (currently $($installedEntry.DisplayVersion))."
+} elseif ($installedEntry -and $installtype -eq 'upgrade') {
+    Write-Host "upgrade — upgrading VLC media player (currently $($installedEntry.DisplayVersion))."
 }
 
 # --- Ensure working directory ---

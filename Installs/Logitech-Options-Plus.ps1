@@ -3,7 +3,7 @@
 # Installs Logitech Options+ on Windows.
 #
 # Ninja script variables:
-#   forceinstall - bypass already-installed check when set to any value
+#   installtype - standard (default) or force
 # ==============================================================================
 
 # --- Variables ---
@@ -23,13 +23,13 @@ $installedEntry = $registryPaths |
     Where-Object { $_.DisplayName -like $detectionName } |
     Select-Object -First 1
 
-if ($installedEntry -and -not $forceinstall) {
-    Write-Host "Logitech Options+ is already installed (version $($installedEntry.DisplayVersion)). Set forceinstall to override."
+if ($installedEntry -and $installtype -ne 'force') {
+    Write-Host "Logitech Options+ is already installed (version $($installedEntry.DisplayVersion)). Set installtype to force to reinstall."
     exit 0
 }
 
-if ($installedEntry -and $forceinstall) {
-    Write-Host "forceinstall set — reinstalling Logitech Options+ (currently $($installedEntry.DisplayVersion))."
+if ($installedEntry -and $installtype -eq 'force') {
+    Write-Host "force — reinstalling Logitech Options+ (currently $($installedEntry.DisplayVersion))."
 }
 
 # --- Ensure working directory ---

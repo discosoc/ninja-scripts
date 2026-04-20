@@ -3,14 +3,14 @@
 # Sets script variables and downloads the full install script from the repo.
 #
 # Ninja script variables:
-#   appname       - specify the app to be installed
-#   forceinstall  - bypass already-installed check when set to any value
+#   appname      - specify the app to be installed
+#   installtype  - standard (default), upgrade, or force
 # ==============================================================================
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$appname      = $env:appname
-$forceinstall = $env:forceinstall
+$appname     = $env:appname
+$installtype = $env:installtype
 $scriptUri    = "https://raw.githubusercontent.com/discosoc/ninja-scripts/refs/heads/main/Installs/$appname.ps1"
 
 $response = Invoke-WebRequest -Uri $scriptUri -UseBasicParsing

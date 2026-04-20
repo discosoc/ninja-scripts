@@ -3,7 +3,7 @@
 # Installs Adobe Acrobat DC (64-bit) on Windows.
 #
 # Ninja script variables (set in NinjaRMM, passed as env vars):
-#   forceinstall  - bypass already-installed check when set to any value
+#   installtype - standard (default) or force
 #
 # Downloaded files are retained under $workingDir.
 # TODO: Future - MD5 hash check to skip redundant downloads
@@ -26,13 +26,13 @@ $installedEntry = $registryPaths |
     Where-Object { $_.DisplayName -like $detectionName } |
     Select-Object -First 1
 
-if ($installedEntry -and -not $forceinstall) {
-    Write-Host "Adobe Acrobat DC is already installed (version $($installedEntry.DisplayVersion)). Set forceinstall to override."
+if ($installedEntry -and $installtype -ne 'force') {
+    Write-Host "Adobe Acrobat DC is already installed (version $($installedEntry.DisplayVersion)). Set installtype to force to reinstall."
     exit 0
 }
 
-if ($installedEntry -and $forceinstall) {
-    Write-Host "forceinstall set — reinstalling Adobe Acrobat DC (currently $($installedEntry.DisplayVersion))."
+if ($installedEntry -and $installtype -eq 'force') {
+    Write-Host "force — reinstalling Adobe Acrobat DC (currently $($installedEntry.DisplayVersion))."
 }
 
 # --- Ensure working directory ---

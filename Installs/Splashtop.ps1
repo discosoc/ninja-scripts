@@ -4,7 +4,7 @@
 #
 # Ninja script variables:
 #   splashtopcode - Org custom field - Splashtop deployment package code (required)
-#   forceinstall  - bypass already-installed check when set to any value
+#   installtype   - standard (default) or force
 # ==============================================================================
 
 # --- Ninja variables ---
@@ -32,13 +32,13 @@ $installedEntry = $registryPaths |
     Where-Object { $_.DisplayName -like $detectionName } |
     Select-Object -First 1
 
-if ($installedEntry -and -not $forceinstall) {
-    Write-Host "Splashtop Streamer is already installed (version $($installedEntry.DisplayVersion)). Set forceinstall to override."
+if ($installedEntry -and $installtype -ne 'force') {
+    Write-Host "Splashtop Streamer is already installed (version $($installedEntry.DisplayVersion)). Set installtype to force to reinstall."
     exit 0
 }
 
-if ($installedEntry -and $forceinstall) {
-    Write-Host "forceinstall set — reinstalling Splashtop Streamer (currently $($installedEntry.DisplayVersion))."
+if ($installedEntry -and $installtype -eq 'force') {
+    Write-Host "force — reinstalling Splashtop Streamer (currently $($installedEntry.DisplayVersion))."
 }
 
 # --- Ensure working directory ---
