@@ -18,7 +18,7 @@ if (-not $splashtopcode) {
 # --- Variables ---
 $ProgressPreference = 'SilentlyContinue'
 $workingDir    = "C:\Scripts"
-$downloadUri   = "https://my.splashtop.com/team_deployment/download_directly/msi/5A7PPZR5J3JT"
+$downloadUri   = "https://my.splashtop.com/team_deployment/download_directly/msi/PXX2S4PLSXYS"
 $outFile       = "$workingDir\SplashtopStreamer.msi"
 $detectionName = "*Splashtop Streamer*"
 $registryPaths = @(
