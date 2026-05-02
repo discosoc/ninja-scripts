@@ -19,8 +19,8 @@ if (-not $splashtopcode) {
 $ProgressPreference = 'SilentlyContinue'
 $workingDir    = "C:\Scripts"
 $downloadUri   = "https://my.splashtop.com/team_deployment/download_directly/msi/$splashtopcode"
-$outFile       = "$workingDir\SplashtopStreamer.zip"
-$installFile   = "$workingDir\SplashtopStreamer.msi"
+#$outFile       = "$workingDir\SplashtopStreamer.zip"
+#$installFile   = "$workingDir\SplashtopStreamer.msi"
 $detectionName = "*Splashtop Streamer*"
 $registryPaths = @(
     "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*",
@@ -52,19 +52,20 @@ if (-not (Test-Path $workingDir)) {
 
 # --- Download ---
 Write-Host "Downloading Splashtop Streamer..."
-Invoke-WebRequest -Uri $downloadUri -OutFile $outFile -UseBasicParsing
+#Invoke-WebRequest -Uri $downloadUri -OutFile $outFile -UseBasicParsing
+Invoke-WebRequest -Uri $downloadUri -UseBasicParsing
 Write-Host "Download complete."
 
 # --- Extract ---
-Write-Host "Extracting archive..."
-Expand-Archive -LiteralPath $outFile -DestinationPath $workingDir -Force
-Move-Item "$workingDir\setup.msi" $installFile -Force
-Write-Host "Extraction complete."
+#Write-Host "Extracting archive..."
+#Expand-Archive -LiteralPath $outFile -DestinationPath $workingDir -Force
+#Move-Item "$workingDir\setup.msi" $installFile -Force
+#Write-Host "Extraction complete."
 
 # --- Install ---
-Write-Host "Installing Splashtop Streamer..."
-Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i `"$installFile`" /qn /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
-Write-Host "/i `"$installFile`" /qn /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
-Write-Host "Splashtop Streamer installed successfully."
+#Write-Host "Installing Splashtop Streamer..."
+#Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i `"$installFile`" /qn /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
+#Write-Host "/i `"$installFile`" /qn /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
+#Write-Host "Splashtop Streamer installed successfully."
 
 
