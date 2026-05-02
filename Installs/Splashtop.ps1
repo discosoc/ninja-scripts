@@ -18,7 +18,7 @@ if (-not $splashtopcode) {
 # --- Variables ---
 $ProgressPreference = 'SilentlyContinue'
 $workingDir    = "C:\Scripts"
-$downloadUri   = "https://my.splashtop.com/team_deployment/download_directly/msi/PXX2S4PLSXYS"
+$downloadUri   = "https://my.splashtop.com/team_deployment/download_directly/msi/5A7PPZR5J3JT"
 $outFile       = "$workingDir\SplashtopStreamer.zip"
 $installFile   = "$workingDir\SplashtopStreamer.msi"
 $detectionName = "*Splashtop Streamer*"
@@ -63,7 +63,7 @@ Write-Host "Extraction complete."
 
 # --- Install ---
 Write-Host "Installing Splashtop Streamer..."
-#Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i `"$installFile`" /quiet /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
+Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i `"$installFile`" /quiet /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
 Write-Host "Splashtop Streamer installed successfully."
 
 
