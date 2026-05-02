@@ -19,7 +19,7 @@ if (-not $splashtopcode) {
 $ProgressPreference = 'SilentlyContinue'
 $workingDir    = "C:\Scripts"
 $downloadUri   = "https://my.splashtop.com/team_deployment/download_directly/msi/PXX2S4PLSXYS"
-$outFile       = "$workingDir\SplashtopStreamer.msi"
+$outFile       = "$workingDir\SplashtopStreamer.zip"
 $detectionName = "*Splashtop Streamer*"
 $registryPaths = @(
     "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*",
@@ -54,11 +54,14 @@ Write-Host "Downloading Splashtop Streamer..."
 Invoke-WebRequest -Uri $downloadUri -OutFile $outFile -UseBasicParsing
 Write-Host "Download complete."
 
+# --- Extract ---
+Write-Host "Extracting archive..."
+Expand-Archive -LiteralPath $outFile -DestinationPath $workingDir -Force
+Write-Host "Extraction complete."
+
 # --- Install ---
 Write-Host "Installing Splashtop Streamer..."
 #Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i `"$outFile`" /quiet /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
-Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i `"$outFile`" /quiet /norestart /l*v `"$workingDir\splashtop_install.log`" USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
-Get-Content "$workingDir\splashtop_install.log" | Select-Object -Last 50
-Write-Host "Exit code: $LASTEXITCODE"
-write-host "/i `"$outFile`" /quiet /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
 Write-Host "Splashtop Streamer installed successfully."
+
+
