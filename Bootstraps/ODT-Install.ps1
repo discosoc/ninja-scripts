@@ -1,5 +1,5 @@
 # ==============================================================================
-# ODT-Install.ps1 — NinjaRMM bootstrap
+# ODT-Install.ps1 -- NinjaRMM bootstrap
 # Sets script variables and downloads the Office install script from the repo.
 #
 # Ninja script variables:

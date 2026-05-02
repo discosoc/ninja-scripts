@@ -22,15 +22,15 @@ $installedEntry = $registryPaths |
     Select-Object -First 1
 
 if ($installtype -eq 'upgrade' -and -not $installedEntry) {
-    Write-Host "VLC media player is not installed — nothing to upgrade."
+    Write-Host "VLC media player is not installed -- nothing to upgrade."
     exit 0
 } elseif ($installedEntry -and $installtype -ne 'force' -and $installtype -ne 'upgrade') {
     Write-Host "VLC media player is already installed (version $($installedEntry.DisplayVersion)). Set installtype to force to reinstall."
     exit 0
 } elseif ($installedEntry -and $installtype -eq 'force') {
-    Write-Host "force — reinstalling VLC media player (currently $($installedEntry.DisplayVersion))."
+    Write-Host "force -- reinstalling VLC media player (currently $($installedEntry.DisplayVersion))."
 } elseif ($installedEntry -and $installtype -eq 'upgrade') {
-    Write-Host "upgrade — upgrading VLC media player (currently $($installedEntry.DisplayVersion))."
+    Write-Host "upgrade -- upgrading VLC media player (currently $($installedEntry.DisplayVersion))."
 }
 
 # --- Ensure working directory ---

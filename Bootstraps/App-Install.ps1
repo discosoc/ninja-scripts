@@ -1,5 +1,5 @@
 # ==============================================================================
-# App Install — NinjaRMM bootstrap
+# App Install -- NinjaRMM bootstrap
 # Sets script variables and downloads the full install script from the repo.
 #
 # Ninja script variables:

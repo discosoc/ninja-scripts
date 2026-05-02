@@ -24,15 +24,15 @@ $installedEntry = $registryPaths |
     Select-Object -First 1
 
 if ($installtype -eq 'upgrade' -and -not $installedEntry) {
-    Write-Host "Google Earth Pro is not installed — nothing to upgrade."
+    Write-Host "Google Earth Pro is not installed -- nothing to upgrade."
     exit 0
 } elseif ($installedEntry -and $installtype -ne 'force' -and $installtype -ne 'upgrade') {
     Write-Host "Google Earth Pro is already installed (version $($installedEntry.DisplayVersion)). Set installtype to force to reinstall."
     exit 0
 } elseif ($installedEntry -and $installtype -eq 'force') {
-    Write-Host "force — reinstalling Google Earth Pro (currently $($installedEntry.DisplayVersion))."
+    Write-Host "force -- reinstalling Google Earth Pro (currently $($installedEntry.DisplayVersion))."
 } elseif ($installedEntry -and $installtype -eq 'upgrade') {
-    Write-Host "upgrade — upgrading Google Earth Pro (currently $($installedEntry.DisplayVersion))."
+    Write-Host "upgrade -- upgrading Google Earth Pro (currently $($installedEntry.DisplayVersion))."
 }
 
 # --- Ensure working directory ---

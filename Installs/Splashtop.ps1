@@ -39,7 +39,7 @@ if ($installedEntry -and $installtype -ne 'force') {
 }
 
 if ($installedEntry -and $installtype -eq 'force') {
-    Write-Host "force — reinstalling Splashtop Streamer (currently $($installedEntry.DisplayVersion))."
+    Write-Host "force -- reinstalling Splashtop Streamer (currently $($installedEntry.DisplayVersion))."
 }
 
 # --- Ensure working directory ---
@@ -52,8 +52,7 @@ if (-not (Test-Path $workingDir)) {
 
 # --- Download ---
 Write-Host "Downloading Splashtop Streamer..."
-#Invoke-WebRequest -Uri $downloadUri -OutFile $outFile -UseBasicParsing
-Invoke-WebRequest -Uri $downloadUri -UseBasicParsing
+Invoke-WebRequest -Uri $downloadUri -OutFile $outFile -UseBasicParsing
 Write-Host "Download complete."
 
 # --- Extract ---
@@ -64,7 +63,7 @@ Write-Host "Extraction complete."
 
 # --- Install ---
 Write-Host "Installing Splashtop Streamer..."
-#Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i `"$installFile`" /qn /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
+Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i `"$installFile`" /qn /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
 Write-Host "/i `"$installFile`" /qn /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
 Write-Host "Splashtop Streamer installed successfully."
 

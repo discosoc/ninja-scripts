@@ -44,7 +44,7 @@ if ($installedEntry -and $installtype -ne 'force') {
 }
 
 if ($installedEntry -and $installtype -eq 'force') {
-    Write-Host "force — reinstalling PrinterLogic (currently $($installedEntry.DisplayVersion))."
+    Write-Host "force -- reinstalling PrinterLogic (currently $($installedEntry.DisplayVersion))."
 }
 
 # --- Ensure working directory ---

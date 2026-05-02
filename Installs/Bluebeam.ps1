@@ -36,7 +36,7 @@ if ($installedEntry -and $installtype -ne 'force') {
 }
 
 if ($installedEntry -and $installtype -eq 'force') {
-    Write-Host "force — reinstalling Bluebeam Revu (currently $($installedEntry.DisplayVersion))."
+    Write-Host "force -- reinstalling Bluebeam Revu (currently $($installedEntry.DisplayVersion))."
 }
 
 # --- Ensure working directory ---

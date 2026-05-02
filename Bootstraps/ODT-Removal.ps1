@@ -1,5 +1,5 @@
 # ==============================================================================
-# ODT-Removal.ps1 — NinjaRMM bootstrap
+# ODT-Removal.ps1 -- NinjaRMM bootstrap
 # Downloads and runs the Office removal script from the repo.
 # ==============================================================================
 

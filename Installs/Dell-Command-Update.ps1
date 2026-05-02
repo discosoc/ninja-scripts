@@ -40,7 +40,7 @@ if ($uwpEntry -and $installtype -ne 'force') {
 }
 
 if ($uwpEntry -and $installtype -eq 'force') {
-    Write-Host "force — reinstalling Dell Command | Update for Windows Universal (currently $($uwpEntry.DisplayVersion))."
+    Write-Host "force -- reinstalling Dell Command | Update for Windows Universal (currently $($uwpEntry.DisplayVersion))."
 }
 
 # --- Uninstall legacy versions if present ---
