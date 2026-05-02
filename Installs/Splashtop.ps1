@@ -9,7 +9,7 @@
 
 # --- Ninja variables ---
 $splashtopcode = Ninja-Property-Get splashtopcode
-Write-Host $splashtopcode
+
 if (-not $splashtopcode) {
     Write-Host "ERROR: splashtopcode org custom field is required."
     exit 1
@@ -63,7 +63,6 @@ Write-Host "Extraction complete."
 
 # --- Install ---
 Write-Host "Installing Splashtop Streamer..."
-Write-Host $splashtopcode
 Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i `"$installFile`" /quiet /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
 Write-Host "/i `"$installFile`" /quiet /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
 Write-Host "Splashtop Streamer installed successfully."
