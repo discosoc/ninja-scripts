@@ -9,7 +9,7 @@
 
 # --- Ninja variables ---
 $splashtopcode = Ninja-Property-Get splashtopcode
-
+Write-Host $splashtopcode
 if (-not $splashtopcode) {
     Write-Host "ERROR: splashtopcode org custom field is required."
     exit 1
