@@ -57,5 +57,5 @@ Write-Host "Download complete."
 # --- Install ---
 Write-Host "Installing Splashtop Streamer..."
 Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i `"$outFile`" /quiet /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
-#Start-Process -Wait -FilePath $outFile -ArgumentList "/s /i USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
+write-host "/i `"$outFile`" /quiet /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
 Write-Host "Splashtop Streamer installed successfully."
