@@ -20,6 +20,7 @@ $ProgressPreference = 'SilentlyContinue'
 $workingDir    = "C:\Scripts"
 $downloadUri   = "https://my.splashtop.com/team_deployment/download_directly/msi/PXX2S4PLSXYS"
 $outFile       = "$workingDir\SplashtopStreamer.zip"
+$installFile   = "$workingDir\SplashtopStreamer.msi"
 $detectionName = "*Splashtop Streamer*"
 $registryPaths = @(
     "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*",
@@ -57,11 +58,12 @@ Write-Host "Download complete."
 # --- Extract ---
 Write-Host "Extracting archive..."
 Expand-Archive -LiteralPath $outFile -DestinationPath $workingDir -Force
+Rename-Item "$workingDir\setup.msi" $installFile
 Write-Host "Extraction complete."
 
 # --- Install ---
 Write-Host "Installing Splashtop Streamer..."
-#Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i `"$outFile`" /quiet /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
+#Start-Process -Wait -FilePath "msiexec.exe" -ArgumentList "/i `"$installFile`" /quiet /norestart USERINFO=`"decode=$splashtopcode,hidewindow=1,confirm_d=0`""
 Write-Host "Splashtop Streamer installed successfully."
 
 
