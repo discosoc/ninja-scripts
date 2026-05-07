@@ -10,7 +10,7 @@
 $ProgressPreference = 'SilentlyContinue'
 $workingDir  = "C:\Scripts"
 $packageName = "HEIFImageExtension"
-$downloadUri = "http://tlu.dl.delivery.mp.microsoft.com/filestreamingservice/files/28d59c67-94af-4614-936c-fddf4c491598?P1=1778097387&P2=404&P3=2&P4=Or9pcQs%2bA4evRMCdyoXwaVxNKT1KFzAWn%2bbPum072cTZmJ6ISKWUYFclypRv%2fxmmZ92VudnrXnJwimTbpxfV2w%3d%3d"
+$downloadUri = "http://tlu.dl.delivery.mp.microsoft.com/filestreamingservice/files/28d59c67-94af-4614-936c-fddf4c491598?P1=1778195386&P2=404&P3=2&P4=KnwqZw2SS2XGzSADmJFlCePqenvn66m9IDCDvq8nbWZbUj5FYl4Nwkcv6v5izCkSLtPdcwTpcc37HNATQ08mIA%3d%3d"
 $outFile     = "$workingDir\Microsoft.HEIFImageExtension_1.2.30.0_neutral_~_8wekyb3d8bbwe.AppxBundle"
 
 # --- Already-installed check ---
