@@ -42,9 +42,9 @@ if ($installedEntry -and $installtype -eq 'force') {
 # --- Ensure working directory ---
 if (-not (Test-Path $workingDir)) {
     New-Item -Path $workingDir -ItemType Directory | Out-Null
-    Write-Host "Created working directory: $workingDir"
-} else {
-    Write-Host "Working directory already exists: $workingDir"
+}
+if (Test-Path $extractDir) {
+    Remove-Item -Path $extractDir -Recurse -Force
 }
 
 # --- Resolve download URL ---

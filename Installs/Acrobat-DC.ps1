@@ -38,9 +38,9 @@ if ($installedEntry -and $installtype -eq 'force') {
 # --- Ensure working directory ---
 if (-not (Test-Path $workingDir)) {
     New-Item -Path $workingDir -ItemType Directory | Out-Null
-    Write-Host "Created working directory: $workingDir"
-} else {
-    Write-Host "Working directory already exists: $workingDir"
+}
+if (Test-Path "$workingDir\Adobe Acrobat") {
+    Remove-Item -Path "$workingDir\Adobe Acrobat" -Recurse -Force
 }
 
 # --- Download ---

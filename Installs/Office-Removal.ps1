@@ -10,12 +10,13 @@ $workingDir   = "C:\Scripts\Office"
 $configFile   = "$workingDir\OfficeRemoval.xml"
 
 # --- Ensure working directory ---
-if (-not (Test-Path $workingDir)) {
-    New-Item -Path $workingDir -ItemType Directory | Out-Null
-    Write-Host "Created working directory: $workingDir"
-} else {
-    Write-Host "Working directory already exists: $workingDir"
+Get-Process -Name "setup" -ErrorAction SilentlyContinue |
+    Where-Object { $_.Path -like "$workingDir\*" } |
+    Stop-Process -Force -ErrorAction SilentlyContinue
+if (Test-Path $workingDir) {
+    Remove-Item -Path $workingDir -Recurse -Force
 }
+New-Item -Path $workingDir -ItemType Directory | Out-Null
 
 # --- Build removal config ---
 $configXml = @"
