@@ -10,9 +10,6 @@ $workingDir   = "C:\Scripts\Office"
 $configFile   = "$workingDir\OfficeRemoval.xml"
 
 # --- Ensure working directory ---
-Get-Process -Name "setup" -ErrorAction SilentlyContinue |
-    Where-Object { $_.Path -like "$workingDir\*" } |
-    Stop-Process -Force -ErrorAction SilentlyContinue
 if (Test-Path $workingDir) {
     Remove-Item -Path $workingDir -Recurse -Force
 }
